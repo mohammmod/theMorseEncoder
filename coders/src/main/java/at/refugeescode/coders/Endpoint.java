@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping
@@ -21,10 +25,11 @@ public class Endpoint {
 
     @PostMapping("/encoder")
     String enCodeSentence(@RequestBody String message){
-        return message.chars()
-                .mapToObj(ascii -> (char) ascii)
-                .map(ascii -> String.valueOf(ascii))
-                .map(letter -> restTemplate.postForObject(coderurl, letter, String.class))
-                .collect(Collectors.joining());
+        String[] split = message.split("");
+        String collect = Arrays.stream(split)
+                .map(letter -> restTemplate.postForEntity(coderurl, letter, String.class).getBody())
+                .collect(Collectors.joining(""));
+        return collect;
+
     }
 }
