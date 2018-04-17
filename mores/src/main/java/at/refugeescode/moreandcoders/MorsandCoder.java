@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class MorsandCoder {
     HashMap<String, String> hashMap;
 
-    public MorsandCoder() {
+    MorsandCoder() {
         hashMap = new HashMap<>();
 
         String[] letters = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -24,9 +24,10 @@ public class MorsandCoder {
         String[] morse =(".-/-.../-.-./-.././..-./--./..../../.---/-.-/.-.." +
                 "/--/-./---/.--./--.-/.-./.../-/..-/...-/.--/-..-/-.--" +
                 "/--..").split("/");
+        hashMap.put(" ", " / ");
         IntStream.range(0, 26)
                 .forEach(index -> hashMap.put(letters[index], morse[index]));
-        hashMap.put(" ", " / ");
+
     }
 
     @PostMapping("/morse")

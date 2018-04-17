@@ -24,8 +24,9 @@ public class Endpoint {
     private RestTemplate restTemplate;
 
     @PostMapping("/encoder")
-    String enCodeSentence(@RequestBody String message){
-        String[] split = message.split("");
+    String enCodeSentence(@RequestBody Message message){
+        System.out.println(message);
+        String[] split = message.getText().split("");
         String collect = Arrays.stream(split)
                 .map(letter -> restTemplate.postForEntity(coderurl, letter, String.class).getBody())
                 .collect(Collectors.joining(""));

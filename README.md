@@ -5,4 +5,6 @@ The Encoder app provides the /encode endpoint. A post to it carrying a string as
 <li> java 9
 <li> spring_boot 2.0.1
 <li> juint 5
+<li> bootstrap 4.0.0
+<li> thymeleaf
 </ul>
